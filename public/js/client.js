@@ -16,7 +16,7 @@ $('document').ready(function () {
 							alert_id: 'actualCall_'+data.username
 						});
 						setTimeout(function(){
-							$("#alert_button_actualCall").find(".close").hide();
+							$("#alert_button_actualCall_"+data.username).find(".close").hide();
 							$("#answerCall").on("click", function(){
 								app.user.peer.actualCallUsername = data.username;
 							    socket.emit("plugins.acceptedIncomingCall", {peerid:app.user.peer.id, youruid:data.uid});
@@ -61,7 +61,7 @@ $('document').ready(function () {
 							alert_id: 'actualCall_'+call.id
 						});
 					  	setTimeout(function(){
-					  		$("#alert_button_actualCall").find(".close").hide();
+					  		$("#alert_button_actualCall_"+call.id).find(".close").hide();
 							$("#closeCall").on("click", function(){
 								var cid = call.id;
 							    app.user.call[cid].close();
@@ -114,7 +114,7 @@ $('document').ready(function () {
 							$("#alert_button_actualCall_"+cid).remove();
 						});
 					  	setTimeout(function(){
-					  		$("#alert_button_actualCall").find(".close").hide();
+					  		$("#alert_button_actualCall_"+call.id).find(".close").hide();
 							$("#closeCall").on("click", function(){
 								var cid = call.id;
 							    app.user.call[cid].close();
@@ -131,13 +131,27 @@ $('document').ready(function () {
 		callUser = function()
 		{
 			var uid = $(".account").attr("data-uid");
-			socket.emit("plugins.callUser", {uid:uid}, function(err,data){});
-			app.alert({
-				type: 'success',
-				timeout: 3000,
-				title: 'Llamando..',
-				message: "Si responde a la llamada deberás permitir el acceso al micro y empezar a hablar con el/ella.",
-				alert_id: 'actualCall'
+			socket.emit("plugins.callUser", {uid:uid}, function(err,data){
+				if(err)
+				{
+					app.alert({
+						type: 'danger',
+						timeout: 5000,
+						title: 'Error',
+						message: "Para llamar a este usuario debe estar siguiendote",
+						alert_id: 'actualCall'
+					});
+				}
+				else
+				{
+					app.alert({
+						type: 'success',
+						timeout: 5000,
+						title: 'Llamando..',
+						message: "Si responde a la llamada deberás permitir el acceso al micro y empezar a hablar con el/ella.",
+						alert_id: 'actualCall'
+					});
+				}
 			});
 		}
 
