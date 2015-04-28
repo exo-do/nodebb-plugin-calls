@@ -85,7 +85,7 @@ $('document').ready(function () {
 				});
 
 				// Change it with your api key!!
-				app.user.peer = new Peer({ key: 'lwjd5qra8257b9', debug: 3});
+				app.user.peer = new Peer({key: 'l8hbbvlnmy0newmi'});
 				app.user.call = {};
 
 				// Prepare for call answer
