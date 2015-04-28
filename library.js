@@ -19,7 +19,7 @@ var calls = {};
       if(isFollowing)
       {
         User.getUserData(socket.uid, function(err, usData){
-          socket.in('uid_' + data.uid).emit('plugins.incomingCall.'+data.uid, {uid:socket.uid, username:usData.username});
+          socket.in('uid_' + data.uid).emit('plugins.incomingCall.'+data.uid, {uid:socket.uid, username:usData.username, apikey:data.apikey});
           callback(null, null);
         });
       }
@@ -32,6 +32,7 @@ var calls = {};
 
   SocketPlugins.acceptedIncomingCall = function (socket, data, callback) {
     // console.log(socket.uid+" accepted call from "+data.youruid);
+    //console.log(data);
     User.getUserData(socket.uid, function(err, usData){
       socket.in('uid_' + data.youruid).emit('plugins.acceptedIncomingCall.'+data.youruid, {peerid:data.peerid, username:usData.username});
     });
