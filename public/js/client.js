@@ -87,7 +87,7 @@ $('document').ready(function () {
 					try{
 						if( document.URL.indexOf("/user") > -1 && $("#chat-btn") )
 						{	// Si estamos en el perfil de un usuario, ponemos los botones y demas
-							$($("#chat-btn").parent()).append('<br><br><a href="#" class="btn btn-primary" onclick="callUser()" style="border-radius:28px;"> ExoCall</br><img src="http://i.imgur.com/SrwP8H3.png" width="70" height="70" /><!--<i class="fa fa-phone" style="font-size:30px"></i> --> </a>');
+							$($("#chat-btn").parent()).append('<br><br><a href="#" class="btn btn-primary" onclick="callUser()"> ExoCall</br><i class="fa fa-phone-square" style="font-size:25px"></i></a>');
 						}
 					}catch(e){
 					}
